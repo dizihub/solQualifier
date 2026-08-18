@@ -25,6 +25,7 @@ def init_db():
                 id       SERIAL PRIMARY KEY,
                 name     TEXT,
                 owner    TEXT,
+                repo     TEXT,
                 scope    TEXT,
                 answers  JSONB,
                 result   TEXT,
@@ -32,6 +33,8 @@ def init_db():
                 updated  TIMESTAMP DEFAULT NOW()
             );
         ''')
+        # Safe upgrade for existing databases that pre-date the repo column.
+        cur.execute("ALTER TABLE assessments ADD COLUMN IF NOT EXISTS repo TEXT;")
         con.commit()
 
 
@@ -46,7 +49,7 @@ def home():
 def list_all():
     with get_conn() as con, con.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
         cur.execute('''
-            SELECT id, name, owner, scope, answers, result, created, updated
+            SELECT id, name, owner, repo, scope, answers, result, created, updated
             FROM assessments
             ORDER BY created DESC;
         ''')
@@ -58,7 +61,7 @@ def list_all():
 def get_one(rec_id):
     with get_conn() as con, con.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
         cur.execute('''
-            SELECT id, name, owner, scope, answers, result
+            SELECT id, name, owner, repo, scope, answers, result
             FROM assessments WHERE id = %s;
         ''', (rec_id,))
         row = cur.fetchone()
@@ -74,6 +77,7 @@ def save():
     rec_id = d.get('id')
     name = d.get('name', '')
     owner = d.get('owner', '')
+    repo = d.get('repo', '')
     scope = d.get('scope', '')
     answers = json.dumps(d.get('ans', {}))
 
@@ -81,19 +85,19 @@ def save():
         if rec_id:
             cur.execute('''
                 UPDATE assessments
-                   SET name = %s, owner = %s, scope = %s,
+                   SET name = %s, owner = %s, repo = %s, scope = %s,
                        answers = %s, updated = NOW()
                  WHERE id = %s
              RETURNING id;
-            ''', (name, owner, scope, answers, rec_id))
+            ''', (name, owner, repo, scope, answers, rec_id))
             row = cur.fetchone()
             new_id = row[0] if row else rec_id
         else:
             cur.execute('''
-                INSERT INTO assessments (name, owner, scope, answers, result)
-                VALUES (%s, %s, %s, %s, '')
+                INSERT INTO assessments (name, owner, repo, scope, answers, result)
+                VALUES (%s, %s, %s, %s, %s, '')
              RETURNING id;
-            ''', (name, owner, scope, answers))
+            ''', (name, owner, repo, scope, answers))
             new_id = cur.fetchone()[0]
         con.commit()
     return jsonify(ok=True, id=new_id)
