@@ -287,5 +287,13 @@ async function viewProject(id){try{const rec=await (await fetch('/get/'+id)).jso
 async function delProject(id){if(!confirm('Delete assessment record #'+id+'?'))return;try{await fetch('/delete/'+id,{method:'POST'});loadProjects()}catch(e){alert('Could not delete. '+e)}}
 
 /* ---------- init ---------- */
-validateAll();loadProjects();
-</script></body></html>
+validateAll();loadProjects();  
+</script>
+<script>
+document.querySelectorAll('.accordion-header').forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.parentElement.classList.toggle('active');
+    });
+});
+</script>
+</body></html>
