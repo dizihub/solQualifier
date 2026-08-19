@@ -153,17 +153,23 @@
         <div class="helpGrid">
             <div class="helpBox">
                 <h3>Proof of Concept (PoC)</h3>
-                <p><b>Definition:</b> A controlled experiment created to determine whether a technical, engineering, data, or business hypothesis is feasible.</p>
+                <p><b>Definition:</b> A controlled experiment created to determine whether a technical, engineering, data, or business hypothesis is feasible.
+                A PoC proves that an approach can work under defined conditions, but it does not prove production readiness
+                  or enterprise scalability.
+                </p>                 
 
                 <p><b>Primary Question:</b> Can this idea work?</p>
-
                 <ul>
-                    <li>Specific hypothesis documented</li>
-                    <li>Success criteria measurable</li>
-                    <li>Representative scenarios tested</li>
-                    <li>Results and limitations captured</li>
-                    <li>No production SLA commitment</li>
+                    <li>Specific hypothesis or feasibility question is documented.</li>
+                    <li>Success and failure criteria are measurable.</li>
+                    <li>Representative test scenarios or samples are used.</li>
+                    <li>Results, assumptions, constraints, and limitations are captured.</li>
+                    <li>Architecture may be experimental or partially manual.</li>
+                    <li>Data may be sample, synthetic, anonymised, historical, or limited.</li>
+                    <li>No production SLA, support model, or enterprise operations commitment is required.</li>
+                    <li>Exit decision is to stop, iterate, redesign, or proceed to MVP.</li>
                 </ul>
+                
             </div>
 
             <div class="helpBox">
@@ -172,25 +178,32 @@
                 <p><b>Primary Question:</b> Does it provide sufficient business value?</p>
 
                 <ul>
-                    <li>Bounded end-to-end workflow</li>
-                    <li>Real users included</li>
-                    <li>Real-world data used</li>
-                    <li>Basic security and operations</li>
-                    <li>Value measured through KPIs</li>
-                </ul>
+                  <li>One bounded end-to-end workflow is defined.</li>
+                  <li>Real target users can complete the workflow with basic guidance.</li>
+                  <li>Representative real-world data is used under approved handling conditions.</li>
+                  <li>Essential integrations required for the selected journey work reliably.</li>
+                  <li>At least one KPI has a baseline and measured result.</li>
+                  <li>Functional, integration, error-handling, and UAT evidence exists.</li>
+                  <li>Basic security, deployment, monitoring, rollback, and support ownership are defined.</li>
+                  <li>Output is a scale, pivot, redesign, commercialise, or stop decision.</li>
+              </ul>
             </div>
 
             <div class="helpBox">
                 <h3>Enterprise Grade</h3>
-                <p><b>Definition:</b> A production-ready, secure, scalable, governed, and supportable solution.</p>
-                <p><b>Primary Question:</b> Can the enterprise safely depend on it?</p>
+                <p><b>Definition:</b> A production-ready, secure, resilient, scalable, governed, supportable, and commercially sustainable solution that can deliver repeatable outcomes across the agreed enterprise scope while operating within customer architecture, security, compliance, service-management, and lifecycle standards.</p>
+                <p><b>Primary Question:</b> Can the enterprise safely depend on this solution?</p>
                 <ul>
-                    <li>Production approved</li>
-                    <li>Scalable and resilient</li>
-                    <li>Security and compliance validated</li>
-                    <li>Monitoring operational</li>
-                    <li>L1/L2/L3 support defined</li>
-                </ul>
+                  <li>Production scope and operational readiness are approved.</li>
+                  <li>Architecture is modular, versioned, configurable, maintainable, and documented.</li>
+                  <li>Performance, load, concurrency, capacity, and scalability are validated.</li>
+                  <li>Availability, resilience, backup, recovery, rollback, and failure handling are tested.</li>
+                  <li>Security, compliance, data governance, and audit controls are approved.</li>
+                  <li>Observability, dashboards, alerts, cost, and usage monitoring are operational.</li>
+                  <li>L1/L2/L3 support, SLAs/SLOs, runbooks, escalation, and change processes are defined.</li>
+                  <li>Commercial model, IP/licensing position, deployment model, and repeatable estimation are available.</li>
+                  <li>Reusable core is separated from customer-specific configuration or extensions.</li>
+              </ul>
             </div>
         </div>
     </div>
